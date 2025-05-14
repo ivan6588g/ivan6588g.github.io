@@ -1,1 +1,42 @@
-Hello World
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prueba de Geolocalización</title>
+  </head>
+  <body style="font-family: sans-serif; text-align: center; padding-top: 100px">
+    <h1>Ubicación Actual</h1>
+    <p id="status">Solicitando ubicación...</p>
+    <p><strong>Latitud:</strong> <span id="lat"></span></p>
+    <p><strong>Longitud:</strong> <span id="lng"></span></p>
+
+    <script>
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            document.getElementById("lat").textContent =
+              position.coords.latitude;
+            document.getElementById("lng").textContent =
+              position.coords.longitude;
+            document.getElementById("status").textContent =
+              "Ubicación obtenida correctamente";
+            console.log(
+              "Lat:",
+              position.coords.latitude,
+              "Lng:",
+              position.coords.longitude
+            );
+          },
+          function (error) {
+            document.getElementById("status").textContent =
+              "Error: " + error.message;
+            console.error("Error:", error.message);
+          }
+        );
+      } else {
+        document.getElementById("status").textContent =
+          "Geolocalización no soportada";
+      }
+    </script>
+  </body>
+</html>
